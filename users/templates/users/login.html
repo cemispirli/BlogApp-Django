@@ -1,0 +1,35 @@
+
+{% extends 'base.html' %} {% block title %}login{% endblock %}
+{% load crispy_forms_tags %}
+{% block content %}
+<div class="content-section">
+    <form action="" method="post">
+        {% csrf_token %}
+        <fieldset class="form-group">
+            <legend class="border-bottom mb-4">Login</legend>
+            {{ form|crispy }}
+        </fieldset>
+        <div class="form-group">
+            <button class="btn btn-outline-info" type="submit">Login</button>
+           
+            <button class="btn btn-outline-info ">
+                <a href="{% url 'social:begin' 'google-oauth2' %}" style="text-decoration: none">
+                    
+                        <img width="22px" style="margin-right: 5px;"  alt="Google sign-in" 
+                            src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/512px-Google_%22G%22_Logo.svg.png" />
+            
+                Login With Google
+
+                </a>
+            </button>
+            
+            </div>
+        </form>
+        <div class="border-top pt-3">
+            <small class="text-muted">
+                Need an account?<a class="ml-2" href="{% url 'register' %}">Sign Up Now</a>
+            </small>
+        </div>
+        
+    </div>
+    {% endblock %}

@@ -1,0 +1,86 @@
+{% load static %}
+
+<nav class="navbar navbar-toggleable-sm navbar-inverse fixed-top px-5" style="background-color: #5F788A;">
+    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
+        data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false"
+        aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <a class="navbar-brand" href="{% url 'blog:list_all' %}">Cem Blog</a>
+
+    <div class="collapse navbar-collapse" id="navbarCollapse">
+        <ul class="navbar-nav mr-auto">
+
+            <li class="nav-item active">
+
+                <a class="nav-link" href="{% url 'blog:list_all' %}">Home</a>
+            </li>
+            {% if request.user.is_superuser %}
+
+            <li class="nav-item active">
+
+                <a class="nav-link" href="{% url 'blog:list_published' %}">Published</a>
+            </li>
+            <li class="nav-item active">
+
+                <a class="nav-link" href="{% url 'blog:list_draft' %}">Drafts</a>
+
+            {% endif %}
+
+            <li class="nav-item active">
+                <a class="nav-link" href="https://github.com/cemispirli" target="_blank" rel="noopener">About</a>
+            </li>
+        </ul>
+
+        <ul class="navbar-nav ml-auto">
+            {% if request.user.is_authenticated %}
+            <li class="nav-item active">
+                <a class="nav-link" href="{% url 'blog:create' %}">New Post</a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link"
+                href = "{% url 'profile' %}">
+                Profile
+            </a>
+            </li>
+            {% if request.user.is_superuser %}
+            <li class="nav-item active">
+                <a class="nav-link"
+                href = "{% url 'admin:index' %}" target="_blank" rel="noopener">
+                AdminPanel
+            </a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link"
+                href = "{% url 'profiles' %}" target="_blank" rel="noopener">
+                Profiles
+            </a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link"
+                href = "{% url 'user_list' %}">
+                Users List
+            </a>
+            </li>
+
+            {% endif %}
+
+            <li class="nav-item active">
+              {% comment %} {% url 'logout' %} {% endcomment %}
+              <a class="nav-link" href="{% url 'logout' %}">Log Out</a>
+            </li>
+            {% else %}
+
+            <li class="nav-item active">
+                {% comment %} {% url 'register' %} {% endcomment %}
+                <a class="nav-link" href="{% url 'register' %}">Register</a>
+            </li>
+            <li class="nav-item active">
+                {% comment %} {% url 'login' %} {% endcomment %}
+                <a class="nav-link" href="{% url 'login' %}">Login</a>
+            </li>
+            {% endif %}
+        </ul>
+    </div>
+</nav>
+

@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+<h1 style="text-align: center;">Users List</h1>
+<div class="row mt-5" >
+    {% for obj in object_list %}
+    <div class="col-4">
+
+        <div class="card shadow p-3 mb-5 bg-white rounded" 
+        {% if obj.is_superuser %}
+        style="width: 18rem; height: 28rem;background-color: rgb(0, 164, 240); "
+        {%else%}
+        style="width: 18rem; height: 28rem;background-color: rgb(0, 240, 140); "
+        {%endif%}
+        >
+            
+            <img src="{{ obj.profile.image.url }}" class="card-img-top" alt="post_image" style="width:16rem; height: 12rem; align-self:center;">
+            <hr>
+            <div class="card-body">
+                <h5 class="card-title">{{obj.username}}</h5>
+                <p class="card-text">{{obj.email}}</p>                
+                <p class="card-text">Superuser = {{obj.is_superuser}}</p>
+                <p class="card-text">Bio = {{obj.profile.bio|truncatechars:20}}...</p>
+                <p class="card-text"><small>Join Date = {{obj.date_joined}}</small></p>
+                
+                
+                
+                
+                
+
+                
+            </div>
+        </div>
+    </div>
+
+    {% endfor %}
+</div>
+{% endblock content %}

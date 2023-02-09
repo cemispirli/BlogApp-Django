@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+<h1 style="text-align: center;">Cem Blog</h1>
+<div class="row mt-5" >
+    {% for obj in object_list %}
+    <div class="col-4">
+        <a href="{% url 'blog:detail' obj.slug %}" style="text-decoration:none;   color: inherit;      ">
+
+        <div class="card shadow p-3 mb-5 bg-white rounded" style="width: 18rem; min-height:min-content; ">
+            <img src="{{ obj.image.url }}" class="card-img-top" alt="post_image" style="width:15rem; height: 11rem; align-self:center;">
+            <hr>
+            <div class="card-body">
+                <h5 class="card-title">{{obj.title}}</h5>
+                <p class="card-text">{{obj.content|truncatechars:20}}</p>
+
+                <p>
+                <p class="card-text"><small>
+                        <!-- Posted {{ obj.publish_date|timesince }} ago. -->
+                        Created {{ obj.publish_date }}
+                    </small>
+                </p>
+                <p class="card-text">
+                    <small style="text-transform: capitalize; " >
+                    Created by {{ obj.author }}
+
+                    </small>
+                </p>
+                
+                <span><i class="far fa-comment-alt ml-2"></i>{{ obj.comment_count }}</span>
+                <span><i class="fas fa-eye ml-2"></i>{{ obj.view_count }}</span>
+                <span><i class="fa-solid fa-heart ml-2"></i>{{ obj.like_count }}</span>
+
+                </p>
+            </div>
+        </div>
+        </a>
+    </div>
+
+    {% endfor %}
+</div>
+{% endblock content %}
